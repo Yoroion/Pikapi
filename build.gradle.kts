@@ -37,7 +37,25 @@ kotlin {
 
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                // Kotlinx Libraries
+                implementation(KotlinX.serialization.json)
+                implementation(KotlinX.serialization.protobuf)
+                implementation(KotlinX.coroutines.core)
+                implementation(KotlinX.datetime)
+                implementation("org.jetbrains.kotlinx:atomicfu:_")
+                // Ktor
+                implementation(Ktor.client.core)
+                implementation(Ktor.client.websockets)
+                implementation(Ktor.client.encoding)
+                // Encoding
+                implementation("io.matthewnelson.kotlin-components:encoding-base64:_")
+                implementation("com.soywiz.korlibs.krypto:krypto:_")
+                // IO
+                implementation(Square.okio)
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
@@ -45,14 +63,17 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-core:2.0.3")
-                implementation("io.ktor:ktor-client-cio:2.0.3")
+                implementation(Ktor.client.cio)
             }
         }
         val jvmTest by getting
         val jsMain by getting
         val jsTest by getting
-        val nativeMain by getting
+        val nativeMain by getting {
+            dependencies {
+                implementation(Ktor.client.curl)
+            }
+        }
         val nativeTest by getting
     }
 }
