@@ -19,13 +19,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(BOTH) {
-        browser {
-            commonWebpackConfig {
-                cssSupport.enabled = true
-            }
-        }
-    }
+
     val hostOs = System.getProperty("os.name")
     val isMingwX64 = hostOs.startsWith("Windows")
     val nativeTarget = when {
@@ -67,8 +61,6 @@ kotlin {
             }
         }
         val jvmTest by getting
-        val jsMain by getting
-        val jsTest by getting
         val nativeMain by getting {
             dependencies {
                 implementation(Ktor.client.curl)
